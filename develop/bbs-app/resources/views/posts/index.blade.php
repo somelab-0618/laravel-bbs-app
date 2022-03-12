@@ -8,6 +8,7 @@
         <div class="card-body">
             <h3>{{$post->title}}</h3>
             <p class="post-card__text fs-5">{{$post->content}}</p>
+            <p class="post-card__text">投稿者: {{$post->user->name}}</p>
         </div>
     </div>
     @endforeach
