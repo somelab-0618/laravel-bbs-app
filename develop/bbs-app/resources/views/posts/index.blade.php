@@ -9,6 +9,12 @@
             <h3>{{$post->title}}</h3>
             <p class="post-card__text fs-5">{{$post->content}}</p>
             <p class="post-card__text">投稿者: {{$post->user->name}}</p>
+            @if($post->user_id === Auth::id())
+            <div>
+                <button class="btn btn-primary">編集</button>
+                <button class="btn btn-danger">削除</button>
+            </div>
+            @endif
         </div>
     </div>
     @endforeach
