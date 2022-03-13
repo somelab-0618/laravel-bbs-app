@@ -17,4 +17,5 @@ use App\Http\Controllers\PostController;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('posts', PostController::class);
+Route::resource('posts', PostController::class)->only(['index']);
+Route::resource('posts', PostController::class)->only(['create', 'edit', 'update', 'destroy'])->middleware('auth');
