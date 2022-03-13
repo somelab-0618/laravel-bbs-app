@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->get();
+        $posts = Post::with('user')->orderBy('id', 'desc')->get();
         return view('posts.index', compact('posts'));
     }
 
@@ -37,7 +37,17 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $title = $request->title;
+        $content = $request->content;
+        $user_id = $request->user_id;
+
+        $post = new Post();
+        $post->title = $title;
+        $post->content = $content;
+        $post->user_id = $user_id;
+        $post->save();
+
+        return redirect()->route('posts.index');
     }
 
     /**
