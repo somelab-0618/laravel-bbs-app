@@ -35,9 +35,18 @@ class PostController extends Controller
      * @param  \App\Http\Requests\StorePostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request, Post $post)
+    public function store(StorePostRequest $request)
     {
-        $post = Post::create($request->all());
+        $title = $request->title;
+        $content = $request->content;
+        $user_id = $request->user_id;
+
+        $post = new Post();
+        $post->title = $title;
+        $post->content = $content;
+        $post->user_id = $user_id;
+        $post->save();
+
         return redirect()->route('posts.index');
     }
 
@@ -47,8 +56,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
+        $post = Post::find($id);
         return view('posts.edit', compact('post'));
     }
 
@@ -59,9 +69,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, $id)
     {
-        $post->update($request->all());
+        $post = Post::find($id);
+        $post->update(['title' => $request->title, 'content' => $request->content]);
         return redirect()->route('posts.index');
     }
 
@@ -71,8 +82,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
+        $post = Post::find($id);
         $post->delete();
         return redirect()->route('posts.index');
     }

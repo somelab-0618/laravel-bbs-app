@@ -18,4 +18,5 @@
   @endif
   <input type="hidden" name="user_id" value="{{Auth::id()}}">
   <button type="submit" class="btn btn-primary">{{ $is_edit ? '更新':'投稿'; }}</button>
+  <a href="{{ route('posts.index') }}" class="btn btn-secondary">戻る</a>
 </form>
