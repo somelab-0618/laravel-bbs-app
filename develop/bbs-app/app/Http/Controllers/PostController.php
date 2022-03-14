@@ -35,30 +35,10 @@ class PostController extends Controller
      * @param  \App\Http\Requests\StorePostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request, Post $post)
     {
-        $title = $request->title;
-        $content = $request->content;
-        $user_id = $request->user_id;
-
-        $post = new Post();
-        $post->title = $title;
-        $post->content = $content;
-        $post->user_id = $user_id;
-        $post->save();
-
+        $post = Post::create($request->all());
         return redirect()->route('posts.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
     }
 
     /**
@@ -69,7 +49,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -81,7 +61,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->update($request->all());
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -92,6 +73,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }

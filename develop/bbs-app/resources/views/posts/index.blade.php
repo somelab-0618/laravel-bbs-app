@@ -10,9 +10,13 @@
             <p class="post-card__text fs-5">{{$post->content}}</p>
             <p class="post-card__text">投稿者: {{$post->user->name}}</p>
             @if($post->user_id === Auth::id())
-            <div>
-                <button class="btn btn-primary">編集</button>
-                <button class="btn btn-danger">削除</button>
+            <div class="d-flex">
+                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary me-2">編集</a>
+                <form action="{{route('posts.destroy', $post->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">削除</button>
+                </form>
             </div>
             @endif
         </div>
