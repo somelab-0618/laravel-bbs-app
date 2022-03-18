@@ -24,12 +24,12 @@
             <form action="{{ route("goods.destroy", $post->id) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-info btn-sm"><i class="bi bi-heart"></i><span class="badge">{{ $post->goods->count() }}</span></button>
+                <button type="submit" class="btn btn-default btn-sm"><i class="bi {{ $post->goods->count() ? 'bi-heart-fill text-danger': 'bi-heart'; }}"></i><span class="badge text-dark fs-6">{{ $post->goods->count() }}</span></button>
             </form>
             @else
                 <form action="{{ route("goods.store",['id' => $post->id]) }}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-secondary btn-sm"><i class="bi bi-heart"></i><span class="badge">{{ $post->goods->count() }}</span></button>
+                    <button type="submit" class="btn btn-default btn-sm"><i class="bi {{ $post->goods->count() ? 'bi-heart-fill text-danger': 'bi-heart'; }}"></i><span class="badge text-dark fs-6">{{ $post->goods->count() }}</span></button>
                 </form>
             @endif
             </div>
