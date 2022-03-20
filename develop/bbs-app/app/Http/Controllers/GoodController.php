@@ -8,11 +8,6 @@ use App\Models\Good;
 
 class GoodController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth', 'verified'])->only(['create', 'destroy']);
-    // }
-
     public function store(Request $request)
     {
         Good::create([
