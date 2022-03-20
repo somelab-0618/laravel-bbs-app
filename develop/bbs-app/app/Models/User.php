@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         $this->hasMany(Post::class);
     }
+
+    public function Goods()
+    {
+        return $this->hasMany(Good::class, 'user_id');
+    }
 }

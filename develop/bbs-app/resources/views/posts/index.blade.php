@@ -19,6 +19,20 @@
                 </form>
             </div>
             @endif
+            <div>
+            @if($post->is_good_by_auth_user())
+            <form action="{{ route("goods.destroy", $post->id) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-default btn-sm"><i class="bi {{ $post->goods->count() ? 'bi-heart-fill text-danger': 'bi-heart'; }}"></i><span class="badge text-dark fs-6">{{ $post->goods->count() }}</span></button>
+            </form>
+            @else
+                <form action="{{ route("goods.store",['id' => $post->id]) }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-default btn-sm"><i class="bi {{ $post->goods->count() ? 'bi-heart-fill text-danger': 'bi-heart'; }}"></i><span class="badge text-dark fs-6">{{ $post->goods->count() }}</span></button>
+                </form>
+            @endif
+            </div>
         </div>
     </div>
     @endforeach
